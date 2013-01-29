@@ -17,7 +17,7 @@ CACHES = {
     },
 }
 
-MEDIA_ROOT = os.path.join(BASE_DIR, os.pardir, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SOUTH_TESTS_MIGRATE = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
