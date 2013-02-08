@@ -1,14 +1,31 @@
+# coding=utf-8
 import os
-
-BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, os.pardir)
+import platform
 
 _ = lambda s: s
+
+
+BASE_DIR = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        os.pardir,
+        os.pardir,
+    )
+)
+
+# Workaround for bug in Pycharm when calling syncdb on mac
+if platform.system() == 'Darwin':
+    os.environ['LANG'] = 'de_DE.UTF-8'
 
 PROJECT_NAME = '{{ project_name }}'
 TEMPLATE_DEBUG = True
 TIME_ZONE = 'Europe/Berlin'
 LANGUAGE_CODE = 'de'
 SITE_ID = 1
+
+LANGUAGES = (
+    'de', _('German'),
+)
 
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
@@ -62,6 +79,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
 ]
 
 TEMPLATE_DIRS = (
@@ -72,4 +90,3 @@ STATICFILES_DIRS = (
 LOCALE_PATHS = (
     '%s/locale' % BASE_DIR,
 )
-

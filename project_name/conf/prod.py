@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 from .base import *
 
@@ -36,8 +37,8 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
+            'level': 'WARNING',
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
         'sentry': {

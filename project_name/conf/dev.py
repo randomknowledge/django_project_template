@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 from .base import *
 
@@ -34,8 +35,8 @@ LOGGING = {
     },
     'handlers': {
         'console':{
-            'level':'DEBUG',
-            'class':'logging.StreamHandler',
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
     },
@@ -55,3 +56,10 @@ LOGGING = {
     },
 }
 
+try:
+    from debug_toolbar import VERSION
+except ImportError:
+    pass
+else:
+    INSTALLED_APPS += ('debug_toolbar',)
+    MIDDLEWARE_CLASSES += ("debug_toolbar.middleware.DebugToolbarMiddleware",)

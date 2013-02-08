@@ -1,3 +1,4 @@
+# coding=utf-8
 from {{ project_name }}.conf.dev import *
 
 try:
