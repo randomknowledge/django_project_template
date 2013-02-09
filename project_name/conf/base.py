@@ -24,7 +24,7 @@ LANGUAGE_CODE = 'de'
 SITE_ID = 1
 
 LANGUAGES = (
-    'de', _('German'),
+    ('de', _('German')),
 )
 
 MEDIA_URL = '/media/'
