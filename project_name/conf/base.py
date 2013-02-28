@@ -5,6 +5,7 @@ import platform
 _ = lambda s: s
 
 
+PROJECT_NAME = '{{ project_name }}'
 BASE_DIR = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__),
@@ -13,11 +14,16 @@ BASE_DIR = os.path.abspath(
     )
 )
 
+PROJECT_DIR = os.path.abspath(
+    os.path.join(
+        BASE_DIR, PROJECT_NAME
+    )
+)
+
 # Workaround for bug in Pycharm when calling syncdb on mac
 if platform.system() == 'Darwin':
     os.environ['LANG'] = 'de_DE.UTF-8'
 
-PROJECT_NAME = '{{ project_name }}'
 TEMPLATE_DEBUG = True
 TIME_ZONE = 'Europe/Berlin'
 LANGUAGE_CODE = 'de'
@@ -83,6 +89,7 @@ INSTALLED_APPS = [
 ]
 
 TEMPLATE_DIRS = (
+    '%s/templates' % PROJECT_DIR,
 )
 STATICFILES_DIRS = (
     '%s/static' % BASE_DIR,

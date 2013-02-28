@@ -13,7 +13,7 @@ urlpatterns = patterns(
     ),
 
     url(
-        r'^',
+        r'',
         include('{{ project_name }}.urls')
     ),
 )

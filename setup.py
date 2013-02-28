@@ -16,7 +16,7 @@ setup(
     description='',
     long_description=open('Readme.md').read(),
     zip_safe=False,
-    install_requires=['Django==1.4.3', ],
+    install_requires=['Django==1.5', ],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
