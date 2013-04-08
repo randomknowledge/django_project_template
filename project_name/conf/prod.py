@@ -37,13 +37,13 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'WARNING',
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
         'sentry': {
             'level': 'WARNING',
-            'class': 'raven.contrib.django.handlers.SentryHandler',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
             'formatter': 'verbose',
         },
     },
