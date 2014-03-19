@@ -3,3 +3,4 @@
 - include: packages.yml
 - include: pip.yml
 - include: database.yml
+- include: assets.yml
