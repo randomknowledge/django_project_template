@@ -20,4 +20,6 @@
     - database
     - update
     - app
+  notify:
+    - restart uwsgi
 {% endverbatim %}
