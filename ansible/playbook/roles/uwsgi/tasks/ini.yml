@@ -1,0 +1,11 @@
+{% verbatim %}
+---
+- name: Install uwsgi ini.
+  notify: restart uwsgi
+  template: >
+    src=uwsgi.ini.j2
+    dest={{project.root}}/uwsgi.ini
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+{% endverbatim %}
