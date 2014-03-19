@@ -1,0 +1,19 @@
+{% verbatim %}
+---
+- name: Collect Assets
+  sudo_user: "{{project.user}}"
+  django_manage: >
+    command=collectstatic
+    app_path="{{project.root}}"
+    settings="{{project.settings}}"
+    virtualenv="{{project.virtualenv}}"
+  tags:
+    - assets
+    - collectstatic
+    - update
+    - app
+
+  notify:
+    - restart nginx
+    - restart uwsgi
+{% endverbatim %}

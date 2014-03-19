@@ -1,0 +1,17 @@
+[uwsgi]
+chdir = {{ project.root }}
+socket = {{ project.socket }}
+logto = {{ project.root }}/logs/uwsgi.log
+home = {{ project.virtualenv }}
+env = DJANGO_SETTINGS_MODULE={{ project.settings }}
+pythonpath = {{ project.root }}/
+module = {{ project.wsgi }}
+master= 1
+pidfile = {{ project.pid }}
+processes = 4
+uid = {{ project.user }}
+gid = {{ project.group }}
+chmod-socket = 1
+chown-socket = 1
+max-requests = 5000
+vacuum = 1

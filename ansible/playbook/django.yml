@@ -5,6 +5,6 @@
   roles:
     - { role: django }
     - { role: uwsgi }
+    - { role: nginx }
     #- { role: redis }
     #- { role: postgres }
-    #- { role: nginx }
