@@ -1,0 +1,24 @@
+{% verbatim %}
+---
+- name: Install uwsgi upstart job.
+  notify: restart uwsgi
+  template: >
+    src=upstart.uwsgi.conf.j2
+    dest=/etc/init/{{project.name}}-uwsgi.conf
+    owner=root
+    group=root
+    mode=0644
+  tags:
+    - configuration
+    - uwsgi
+    - appserver
+    - update
+
+- name: Start daemon and enable it for system startup
+  service: >
+    name={{project.name}}-uwsgi
+    state=started
+    enabled=yes
+  tags:
+    - uwsgi
+{% endverbatim %}

@@ -1,0 +1,13 @@
+{% verbatim %}
+---
+- name: Django | Pip | Install Requirements.
+  pip: >
+    requirements={{item}}
+    virtualenv={{project.virtualenv}}
+  with_items: project.requirements
+  tags:
+    - packages
+    - application
+    - pip
+    - app
+{% endverbatim %}

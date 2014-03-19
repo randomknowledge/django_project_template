@@ -1,0 +1,22 @@
+# simple uWSGI upstart job
+
+start on runlevel [2345]
+stop on runlevel [06]
+respawn
+
+exec {{ project.virtualenv }}/bin/uwsgi \
+  --chdir={{ project.root }} \
+  --socket {{ project.socket }} \
+  --logto {{ project.root }}/logs/uwsgi.log \
+  --home {{ project.virtualenv }} \
+  --env DJANGO_SETTINGS_MODULE={{ project.settings }} \
+  --pythonpath {{ project.root }}/ \
+  --module {{ project.wsgi }} \
+  --master \
+  --pidfile {{ project.pid }} \
+  --processes 4 \
+  --uid {{ project.user }} \
+  --static-map /static={{ project.root }}/static \
+  --static-map /media={{ project.root }}/media \
+  --max-requests 5000 \
+  --vacuum

@@ -1,0 +1,36 @@
+{% verbatim %}
+---
+- name: Create application group.
+  group: name={{ project.group }} state=present
+
+- name: Create application user and home.
+  user: >
+    home="{{ project.root }}"
+    name="{{ project.user }}"
+    group="{{ project.group }}"
+    createhome=yes
+    state=present
+  tags:
+    - base
+    - user
+    - provision
+    - app
+
+- name: Update sources in project root
+  sudo: yes
+  copy: >
+    src=../../../../../
+    dest="{{ project.root }}/"
+    owner="{{ project.user }}"
+    group="{{ project.group }}"
+    force=yes
+
+- name: Change permissions
+  sudo: true
+  shell: "chown -R {{project.user}}:{{project.group}} {{project.root}}"
+  tags:
+    - base
+    - user
+    - provision
+    - app
+{% endverbatim %}

@@ -1,0 +1,22 @@
+{% verbatim %}
+---
+- name: uWsgi | Create log directory
+  file: >
+    dest={{project.root}}/logs/
+    owner={{project.user}}
+    group={{project.group}}
+    state=directory
+  tags:
+    - logs
+    - provision
+
+- name: uWsgi | Create run (pid and socket) directory
+  file: >
+    dest={{project.root}}/run/
+    owner={{project.user}}
+    group={{project.group}}
+    state=directory
+  tags:
+    - logs
+    - provision
+{% endverbatim %}

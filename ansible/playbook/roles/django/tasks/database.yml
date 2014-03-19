@@ -1,0 +1,23 @@
+{% verbatim %}
+---
+- name: Django | Create Database Tables
+  django_manage: >
+    command=syncdb
+    app_path={{project.root}}
+    settings={{project.settings}}
+    virtualenv={{project.virtualenv}}
+  tags:
+    - database
+    - app
+
+- name: Django | Migrate Django database.
+  django_manage: >
+    command=migrate
+    app_path={{project.root}}
+    settings={{project.settings}}
+    virtualenv={{project.virtualenv}}
+  tags:
+    - database
+    - update
+    - app
+{% endverbatim %}
