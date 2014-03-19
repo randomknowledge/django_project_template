@@ -1,3 +1,3 @@
-gunicorn
 raven
 django-redis-cache
+uwsgi>=2.0.3

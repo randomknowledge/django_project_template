@@ -1,0 +1,23 @@
+{% verbatim %}
+---
+- name: Django | Packages | Install required system packages.
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - build-essential
+    - git
+    - vim
+    - python-dev
+    - python-setuptools
+    - python-psycopg2
+    - python-virtualenv
+    - python-pip
+    - libpq-dev
+  tags:
+    - base
+    - packages
+    - provision
+    - app
+{% endverbatim %}

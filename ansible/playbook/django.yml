@@ -1,0 +1,10 @@
+---
+- name: Configure django
+  hosts: all
+  sudo: yes
+  roles:
+    - { role: django }
+    - { role: uwsgi }
+    #- { role: redis }
+    #- { role: postgres }
+    #- { role: nginx }
