@@ -1,6 +1,6 @@
 {% verbatim %}
 ---
-- name: Django | Create Database Tables
+- name: Create Database Tables
   django_manage: >
     command=syncdb
     app_path={{project.root}}
@@ -10,7 +10,7 @@
     - database
     - app
 
-- name: Django | Migrate Django database.
+- name: Migrate Django database.
   django_manage: >
     command=migrate
     app_path={{project.root}}

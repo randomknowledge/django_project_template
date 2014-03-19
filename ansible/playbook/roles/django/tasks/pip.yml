@@ -1,6 +1,6 @@
 {% verbatim %}
 ---
-- name: Django | Pip | Install Requirements.
+- name: Install PIP Requirements.
   pip: >
     requirements={{item}}
     virtualenv={{project.virtualenv}}

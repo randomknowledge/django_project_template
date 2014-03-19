@@ -7,17 +7,9 @@
     update-cache=yes
   with_items:
     - build-essential
-    - git
-    - vim
-    - python-dev
-    - python-setuptools
-    - python-psycopg2
-    - python-virtualenv
-    - python-pip
-    - libpq-dev
+    - nginx
   tags:
-    - base
     - packages
     - provision
-    - app
+    - webserver
 {% endverbatim %}

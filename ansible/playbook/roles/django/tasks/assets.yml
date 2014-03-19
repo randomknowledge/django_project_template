@@ -1,0 +1,29 @@
+{% verbatim %}
+---
+- name: Django | Assets | Compress
+  sudo_user: {{project.user}}
+  shell: command=". ${project.virtualenv}bin/activate; cd ${django.root}; python ./manage.py ${item} --settings=${django.settings} --force"
+  with_items: django.post_deploy_tasks
+  tags:
+    - assets
+    - collectstatic
+    - update
+    - app
+
+- name: Django | Assets | Collect
+  sudo_user: ${project.user}
+  django_manage: >
+    command=collectstatic
+    app_path=${django.root}
+    settings=${django.settings}
+    virtualenv=${project.virtualenv}
+  tags:
+    - assets
+    - collectstatic
+    - update
+    - app
+
+  notify:
+    - restart nginx
+    - restart uwsgi
+{% endverbatim %}

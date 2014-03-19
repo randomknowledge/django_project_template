@@ -1,3 +1,4 @@
 ---
 - include: paths.yml
+- include: ini.yml
 - include: upstart.yml
