@@ -1,0 +1,43 @@
+{% verbatim %}
+---
+- name: Ensure python-pycurl is installed
+  when: search.active
+  apt: pkg=python-pycurl state=installed
+
+- name: Ensure Elasticsearch apt signing key is installed
+  when: search.active
+  apt_key: url=http://packages.elasticsearch.org/GPG-KEY-elasticsearch state=present
+
+- name: Ensure Elasticsearch 0.90.x repository is installed
+  when: search.active
+  apt_repository: repo="deb http://packages.elasticsearch.org/elasticsearch/0.90/debian stable main" state=present update_cache=yes
+
+- name: Ensure jre is installed
+  when: search.active
+  apt: 'pkg=openjdk-7-jre state=installed'
+
+- name: Ensure elasticsearch is installed
+  when: search.active
+  apt: pkg=elasticsearch state=installed
+
+- name: Ensure elasticsearch config is in place
+  when: search.active
+  copy: src=elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
+  notify:
+    - restart elasticsearch
+
+- name: Activate haystack+elasticsearch in django (copy search.py)
+  when: search.active
+  notify: restart uwsgi
+  template: >
+    src=search.py.j2
+    dest={{project.root}}/{{project.name}}/conf/modules/search.py
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+
+- name: Activate haystack+elasticsearch in django (import search.py)
+  when: search.active
+  notify: restart uwsgi
+  lineinfile: dest={{project.root}}/{{project.name}}/conf/base.py regexp="from\.modules\.search\s+import" line="from .modules.search import *" state=present
+{% endverbatim %}

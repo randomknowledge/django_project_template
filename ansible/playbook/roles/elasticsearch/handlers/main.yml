@@ -1,0 +1,4 @@
+---
+- name: restart elasticsearch
+  when: search.active
+  service: name=elasticsearch state=restarted
