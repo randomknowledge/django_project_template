@@ -1,6 +1,7 @@
 {% verbatim %}
 ---
 - name: Create Database Tables
+  sudo_user: "{{project.user}}"
   django_manage: >
     command=syncdb
     app_path={{project.root}}
@@ -11,6 +12,7 @@
     - app
 
 - name: Migrate Django database.
+  sudo_user: "{{project.user}}"
   django_manage: >
     command=migrate
     app_path={{project.root}}
