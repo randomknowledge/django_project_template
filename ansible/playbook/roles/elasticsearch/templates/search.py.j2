@@ -11,7 +11,7 @@ INSTALLED_APPS.insert(idx, 'haystack')
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://{{ project.host }}:{{ project.port }}/',
-        'INDEX_NAME': '{{ project.index_name }}',
+        'URL': 'http://{{ search.host }}:{{ search.port }}/',
+        'INDEX_NAME': '{{ search.index_name }}',
     },
 }
