@@ -1,2 +1,4 @@
 ---
 - include: django.yml
+- include: user.yml
+- include: finished.yml

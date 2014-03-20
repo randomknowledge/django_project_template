@@ -1,6 +1,15 @@
 {% verbatim %}
 ---
+- name: Create Database settings py
+  template: >
+    src=db.py.j2
+    dest={{ project.root }}/{{ project.name }}/conf/modules/db.py
+    owner={{ project.user }}
+    group={{ project.group }}
+    mode=0644
+
 - name: Create Database Tables
+  sudo_user: "{{project.user}}"
   django_manage: >
     command=syncdb
     app_path={{project.root}}
@@ -11,6 +20,7 @@
     - app
 
 - name: Migrate Django database.
+  sudo_user: "{{project.user}}"
   django_manage: >
     command=migrate
     app_path={{project.root}}
@@ -22,4 +32,8 @@
     - app
   notify:
     - restart uwsgi
+
+- name: Create Django Superuser
+  sudo_user: "{{project.user}}"
+  raw: 'echo "from django.contrib.auth import get_user_model; get_user_model().objects.create_superuser(''{{ superuser.name }}'', ''{{ superuser.email }}'', ''{{ superuser.password }}'') if not get_user_model().objects.filter(username=''{{ superuser.name }}'').exists() else None" | {{ project.virtualenv }}/bin/python {{project.root}}/manage.py shell --settings={{project.settings}}'
 {% endverbatim %}

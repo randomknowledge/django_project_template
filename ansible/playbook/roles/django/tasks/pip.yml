@@ -1,6 +1,7 @@
 {% verbatim %}
 ---
 - name: Install PIP Requirements.
+  sudo_user: "{{project.user}}"
   pip: >
     requirements={{item}}
     virtualenv={{project.virtualenv}}

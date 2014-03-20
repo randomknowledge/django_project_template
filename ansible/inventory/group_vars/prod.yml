@@ -1,0 +1,30 @@
+---
+project:
+  islive: true
+  name: {{ project_name }}
+  root: /home/{{ project_name }}
+  user: {{ project_name }}
+  group: {{ project_name }}
+  virtualenv: /home/{{ project_name }}/virtualenv
+  settings: {{ project_name }}.conf.prod
+  socket: /home/{{ project_name }}/run/uwsgi.sock
+  pid: /home/{{ project_name }}/run/uwsgi.pid
+  wsgi: {{ project_name }}.wsgi:application
+  host: localhost
+  proto: http
+  requirements:
+    - /vagrant/requirements.txt
+    - /vagrant/requirements_prod.txt
+
+database:
+  engine: postgresql_psycopg2
+  name: {{ project_name }}
+  user: {{ project_name }}
+  host: "localhost"
+  port: 5432
+  {% verbatim %}password: "{{ lookup('password', '/tmp/database.password chars=ascii,numbers,digits,punctuation length=15') }}"{% endverbatim %}
+
+superuser:
+  name: admin
+  {% verbatim %}password: "{{ lookup('password', '/tmp/superuser.password chars=ascii,numbers,digits,punctuation length=15') }}"{% endverbatim %}
+  email: admin@example.com

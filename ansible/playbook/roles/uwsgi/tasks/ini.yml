@@ -1,6 +1,7 @@
 {% verbatim %}
 ---
 - name: Install uwsgi ini.
+  when: project.islive
   notify: restart uwsgi
   template: >
     src=uwsgi.ini.j2
