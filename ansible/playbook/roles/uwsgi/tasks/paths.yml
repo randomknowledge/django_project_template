@@ -1,6 +1,7 @@
 {% verbatim %}
 ---
 - name: uWsgi | Create log directory
+  when: project.islive
   file: >
     dest={{project.root}}/logs/
     owner={{project.user}}
@@ -11,6 +12,7 @@
     - provision
 
 - name: uWsgi | Create run (pid and socket) directory
+  when: project.islive
   file: >
     dest={{project.root}}/run/
     owner={{project.user}}

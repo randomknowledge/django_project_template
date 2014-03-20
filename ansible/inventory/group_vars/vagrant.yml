@@ -1,14 +1,26 @@
 ---
 project:
+  islive: false
   name: {{ project_name }}
-  root: /home/{{ project_name }}
-  user: {{ project_name }}
-  group: {{ project_name }}
-  virtualenv: /home/{{ project_name }}/virtualenv
+  root: /vagrant
+  user: vagrant
+  group: vagrant
+  virtualenv: /home/vagrant/virtualenv
   settings: {{ project_name }}.conf.vagrant
   socket: /home/{{ project_name }}/run/uwsgi.sock
   pid: /home/{{ project_name }}/run/uwsgi.pid
   wsgi: {{ project_name }}.wsgi:application
+  host: localhost
+  proto: http
   requirements:
     - /vagrant/requirements.txt
     - /vagrant/requirements_prod.txt
+
+database:
+  engine: sqlite3
+  name: database.db
+
+superuser:
+  name: admin
+  password: admin
+  email: admin@example.com

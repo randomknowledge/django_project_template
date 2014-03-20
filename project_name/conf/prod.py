@@ -5,15 +5,15 @@ from .base import *
 DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
 
-DATABASES = {
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+CACHES = {
     'default': {
-        'ENGINE': 'django.db.backends.',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
 }
-
+"""
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.RedisCache',
@@ -23,6 +23,7 @@ CACHES = {
         },
     },
 }
+"""
 
 LOGGING = {
     'version': 1,

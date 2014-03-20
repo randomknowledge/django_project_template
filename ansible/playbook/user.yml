@@ -1,0 +1,6 @@
+---
+- name: configure user settings
+  hosts: all
+  sudo: yes
+  roles:
+    - { role: user }

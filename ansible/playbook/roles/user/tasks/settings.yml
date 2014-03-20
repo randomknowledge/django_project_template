@@ -1,0 +1,20 @@
+{% verbatim %}
+---
+- name: copy .bashrc
+  when: not project.islive
+  template: >
+    src=.bashrc.j2
+    dest=/home/vagrant/.bashrc
+    owner="{{ project.user }}"
+    group="{{ project.group }}"
+    mode=0644
+
+- name: copy .inputrc
+  when: not project.islive
+  template: >
+    src=.inputrc.j2
+    dest=/home/vagrant/.inputrc
+    owner="{{ project.user }}"
+    group="{{ project.group }}"
+    mode=0644
+{% endverbatim %}

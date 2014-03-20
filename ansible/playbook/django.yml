@@ -3,8 +3,8 @@
   hosts: all
   sudo: yes
   roles:
+    - { role: postgres }
     - { role: django }
     - { role: uwsgi }
     - { role: nginx }
     #- { role: redis }
-    #- { role: postgres }

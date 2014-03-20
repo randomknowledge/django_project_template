@@ -5,24 +5,17 @@ from .base import *
 DEBUG = True
 THUMBNAIL_DEBUG = True
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'database.db'),
-    },
-}
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
 }
 
+STATICFILES_DIRS = (
+    '%s/static' % BASE_DIR,
+)
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-STATICFILES_DIRS = ()
-
 SOUTH_TESTS_MIGRATE = False
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
