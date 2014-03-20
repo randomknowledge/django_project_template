@@ -1,0 +1,11 @@
+{% verbatim %}
+---
+- name: Install Packages
+  when: database.engine == "postgresql_psycopg2"
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - redis-server
+{% endverbatim %}
