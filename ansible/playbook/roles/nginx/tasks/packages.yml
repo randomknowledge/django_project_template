@@ -1,6 +1,7 @@
 {% verbatim %}
 ---
 - name: Install required system packages.
+  when: project.islive
   apt: >
     pkg={{item}}
     state=installed

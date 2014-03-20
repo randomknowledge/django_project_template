@@ -1,0 +1,19 @@
+{% verbatim %}
+---
+- name: Install Packages
+  when: database.engine == "postgresql_psycopg2"
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - build-essential
+    - postgresql
+    - python-dev
+    - python-setuptools
+    - python-psycopg2
+    - postgresql-9.1
+    - postgresql-contrib-9.1
+    - postgresql-doc-9.1
+    - libpq-dev
+{% endverbatim %}

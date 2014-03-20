@@ -1,8 +1,10 @@
 ---
 - name: restart nginx
+  when: project.islive
   service: name=nginx state=restarted
   sudo_user: root
 
 - name: reload nginx
+  when: project.islive
   service: name=nginx state=reloaded
   sudo_user: root

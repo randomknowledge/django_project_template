@@ -1,6 +1,7 @@
 {% verbatim %}
 ---
 - name: Install uwsgi upstart job.
+  when: project.islive
   notify: restart uwsgi
   template: >
     src=upstart.uwsgi.conf.j2
@@ -15,6 +16,7 @@
     - update
 
 - name: Start daemon and enable it for system startup
+  when: project.islive
   service: >
     name={{project.name}}-uwsgi
     state=started

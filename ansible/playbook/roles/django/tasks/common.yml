@@ -1,9 +1,11 @@
 {% verbatim %}
 ---
 - name: Create application group.
+  when: project.islive
   group: name={{ project.group }} state=present
 
 - name: Create application user and home.
+  when: project.islive
   user: >
     home="{{ project.root }}"
     name="{{ project.user }}"
@@ -17,6 +19,7 @@
     - app
 
 - name: Update sources in project root
+  when: project.islive
   sudo: yes
   copy: >
     src=../../../../../
@@ -26,6 +29,7 @@
     force=yes
 
 - name: Change permissions
+  when: project.islive
   sudo: true
   shell: "chown -R {{project.user}}:{{project.group}} {{project.root}}"
   tags:

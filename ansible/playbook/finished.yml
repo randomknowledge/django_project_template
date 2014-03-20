@@ -1,0 +1,6 @@
+---
+- name: All done.
+  hosts: all
+  sudo: yes
+  roles:
+    - { role: finished }

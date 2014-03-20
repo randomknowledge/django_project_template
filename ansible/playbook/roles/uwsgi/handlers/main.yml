@@ -1,12 +1,14 @@
 {% verbatim %}
 ---
 - name: restart uwsgi
+  when: project.islive
   sudo_user: root
   service: >
     name={{project.name}}-uwsgi
     state=restarted
 
 - name: reload uwsgi
+  when: project.islive
   sudo_user: root
   service: >
     name={{project.name}}-uwsgi

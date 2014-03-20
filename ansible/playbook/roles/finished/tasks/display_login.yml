@@ -1,0 +1,12 @@
+{% verbatim %}
+---
+- name: Login URL
+  debug: 'msg="{{ project.proto }}://{{ project.host }}"'
+
+- name: Username
+  debug: 'msg="Username: {{ superuser.name }}"'
+
+- name: Password
+  debug: 'msg="Password: {{ superuser.password }}"'
+
+{% endverbatim %}

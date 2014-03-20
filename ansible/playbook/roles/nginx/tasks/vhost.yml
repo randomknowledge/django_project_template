@@ -1,12 +1,14 @@
 {% verbatim %}
 ---
 - name: remove default nginx site
+  when: project.islive
   notify: restart nginx
   file: >
     path=/etc/nginx/sites-enabled/default
     state=absent
 
 - name: Install nginx configuration file.
+  when: project.islive
   notify: restart nginx
   template: >
     src=vhost.conf.j2
