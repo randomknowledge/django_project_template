@@ -1,0 +1,17 @@
+# coding: utf-8
+from {{ project.name }}.conf.base import *
+
+idx = len(INSTALLED_APPS)
+try:
+    idx = INSTALLED_APPS.index('{{ project.name }}')
+except ValueError:
+    pass
+INSTALLED_APPS.insert(idx, 'haystack')
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://{{ project.host }}:{{ project.port }}/',
+        'INDEX_NAME': '{{ project.index_name }}',
+    },
+}

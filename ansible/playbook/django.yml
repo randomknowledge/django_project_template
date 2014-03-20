@@ -8,3 +8,4 @@
     - { role: django }
     - { role: uwsgi }
     - { role: nginx }
+    - { role: elasticsearch }

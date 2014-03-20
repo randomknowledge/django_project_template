@@ -28,3 +28,9 @@ superuser:
   name: admin
   {% verbatim %}password: "{{ lookup('password', '/tmp/superuser.password chars=ascii,numbers,digits,punctuation length=15') }}"{% endverbatim %}
   email: admin@example.com
+
+search:
+  active: true
+  host: 127.0.0.1
+  port: 9200
+  index_name: haystack

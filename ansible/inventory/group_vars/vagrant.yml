@@ -24,3 +24,9 @@ superuser:
   name: admin
   password: admin
   email: admin@example.com
+
+search:
+  active: true
+  host: 127.0.0.1
+  port: 9200
+  index_name: haystack
