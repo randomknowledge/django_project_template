@@ -1,5 +1,9 @@
 {% verbatim %}
 ---
+- name: create virtualenv
+  sudo_user: "{{project.user}}"
+  pip: "name=pip virtualenv={{ project.virtualenv }} state=latest"
+
 - name: update base requirements
   sudo_user: "{{project.user}}"
   shell: "{{project.virtualenv}}/bin/pip install -r {{project.root}}/requirements/base/*.txt"
