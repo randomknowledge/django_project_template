@@ -7,4 +7,55 @@
     - restart uwsgi
     - update base requirements
     - update prod requirements
+
+- name: Activate cms in django (copy cms.py)
+  when: cms.active
+  notify: restart uwsgi
+  template: >
+    src=cms.py.j2
+    dest={{project.root}}/{{project.name}}/conf/modules/cms.py
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+
+- name: Activate cms in django (import cms.py)
+  when: cms.active
+  notify: restart uwsgi
+  lineinfile: dest={{project.root}}/{{project.name}}/conf/base.py regexp="from\.modules\.cms\s+import" line="from .modules.cms import *" state=present
+
+- name: Copy cms base.html
+  when: cms.active
+  notify: restart uwsgi
+  template: >
+    src=base.html.j2
+    dest={{project.root}}/{{project.name}}/templates/{{project.name}}/base.html
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+
+- name: Copy cms base_template.html
+  when: cms.active
+  notify:
+    - restart uwsgi
+    - syncdb
+    - migrate
+  template: >
+    src=base_template.html.j2
+    dest={{project.root}}/{{project.name}}/templates/{{project.name}}/base_template.html
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+
+- name: Copy cms menu.html
+  when: cms.active
+  notify:
+    - restart uwsgi
+    - syncdb
+    - migrate
+  template: >
+    src=menu.html.j2
+    dest={{project.root}}/{{project.name}}/templates/{{project.name}}/menu.html
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
 {% endverbatim %}
