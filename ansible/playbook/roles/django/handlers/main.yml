@@ -1,0 +1,36 @@
+{% verbatim %}
+---
+- name: update base requirements
+  sudo_user: "{{project.user}}"
+  shell: "cat {{project.root}}/requirements/base/*.txt | xargs {{project.virtualenv}}/bin/pip install -U"
+
+- name: update prod requirements
+  when: project.islive
+  sudo_user: "{{project.user}}"
+  shell: "cat {{project.root}}/requirements/prod/*.txt | xargs {{project.virtualenv}}/bin/pip install -U"
+
+- name: syncdb
+  sudo_user: "{{project.user}}"
+  django_manage: >
+    command=syncdb
+    app_path={{project.root}}
+    settings={{project.settings}}
+    virtualenv={{project.virtualenv}}
+  tags:
+    - database
+    - app
+
+- name: migrate
+  sudo_user: "{{project.user}}"
+  django_manage: >
+    command=migrate
+    app_path={{project.root}}
+    settings={{project.settings}}
+    virtualenv={{project.virtualenv}}
+  tags:
+    - database
+    - update
+    - app
+  notify:
+    - restart uwsgi
+{% endverbatim %}

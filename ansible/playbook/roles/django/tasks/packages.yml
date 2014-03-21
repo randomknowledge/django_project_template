@@ -15,9 +15,4 @@
     - python-virtualenv
     - python-pip
     - libpq-dev
-  tags:
-    - base
-    - packages
-    - provision
-    - app
 {% endverbatim %}

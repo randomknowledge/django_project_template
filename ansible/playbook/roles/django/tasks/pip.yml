@@ -1,14 +1,15 @@
 {% verbatim %}
 ---
-- name: Install PIP Requirements.
+- name: create virtualenv
   sudo_user: "{{project.user}}"
-  pip: >
-    requirements={{item}}
-    virtualenv={{project.virtualenv}}
-  with_items: project.requirements
-  tags:
-    - packages
-    - application
-    - pip
-    - app
+  pip: "name=pip virtualenv={{ project.virtualenv }} state=latest"
+
+- name: update base requirements
+  sudo_user: "{{project.user}}"
+  shell: "cat {{project.root}}/requirements/base/*.txt | xargs {{project.virtualenv}}/bin/pip install -U"
+
+- name: update prod requirements
+  when: project.islive
+  sudo_user: "{{project.user}}"
+  shell: "cat {{project.root}}/requirements/prod/*.txt | xargs {{project.virtualenv}}/bin/pip install -U"
 {% endverbatim %}

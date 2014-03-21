@@ -26,6 +26,14 @@
   notify:
     - restart elasticsearch
 
+- name: Ensure requirements file is in place
+  when: search.active
+  copy: src=requirements.txt dest={{ project.root }}/requirements/base/search.txt
+  notify:
+    - restart uwsgi
+    - update base requirements
+    - update prod requirements
+
 - name: Activate haystack+elasticsearch in django (copy search.py)
   when: search.active
   notify: restart uwsgi
