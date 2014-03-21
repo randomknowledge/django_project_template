@@ -1,0 +1,73 @@
+# coding: utf-8
+from {{ project.name }}.conf.base import *
+
+_ = lambda s: s
+
+INSTALLED_APPS.insert(0, 'djangocms_text_ckeditor')
+INSTALLED_APPS.insert(0, 'djangocms_admin_style')
+
+INSTALLED_APPS += (
+    'cms',
+    'mptt',
+    'menus',
+    'sekizai',
+    'djangocms_style',
+    'djangocms_column',
+
+    'cms.plugins.link',
+    'cms.plugins.picture',
+    'cms.plugins.video',
+)
+
+MIDDLEWARE_CLASSES += (
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'cms.context_processors.media',
+    'sekizai.context_processors.sekizai',
+)
+
+
+LANGUAGES = (
+    ## Customize this
+    ('de', _('German')),
+    ('en', _('English')),
+)
+
+CMS_LANGUAGES = {
+    ## Customize this
+    'default': {
+        'hide_untranslated': True,
+        'redirect_on_fallback': True,
+        'public': True,
+    },
+    1: [
+        {
+            'redirect_on_fallback': True,
+            'code': 'de',
+            'hide_untranslated': False,
+            'name': _('German'),
+            'public': True,
+        },
+        {
+            'redirect_on_fallback': True,
+            'code': 'en',
+            'hide_untranslated': False,
+            'name': _('English'),
+            'public': True,
+        },
+    ],
+}
+
+CMS_TEMPLATES = (
+    ## Customize this
+    ('base_template.html', 'Base Template'),
+)
+
+CMS_PERMISSION = True
+
+CMS_PLACEHOLDER_CONF = {}

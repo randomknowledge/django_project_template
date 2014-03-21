@@ -16,7 +16,7 @@ setup(
     description='',
     long_description=open('Readme.md').read(),
     zip_safe=False,
-    install_requires=open('requirements.txt').read().split(),
+    install_requires=open('requirements/base/base.txt').read().splitlines(),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
