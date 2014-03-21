@@ -6,10 +6,10 @@
 
 - name: update base requirements
   sudo_user: "{{project.user}}"
-  shell: "{{project.virtualenv}}/bin/pip install -r {{project.root}}/requirements/base/*.txt"
+  shell: "cat {{project.root}}/requirements/base/*.txt | xargs {{project.virtualenv}}/bin/pip install -U"
 
 - name: update prod requirements
   when: project.islive
   sudo_user: "{{project.user}}"
-  shell: "{{project.virtualenv}}/bin/pip install -r {{project.root}}/requirements/prod/*.txt"
+  shell: "cat {{project.root}}/requirements/prod/*.txt | xargs {{project.virtualenv}}/bin/pip install -U"
 {% endverbatim %}
