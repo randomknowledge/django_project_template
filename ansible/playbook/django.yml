@@ -9,3 +9,4 @@
     - { role: uwsgi }
     - { role: nginx }
     - { role: elasticsearch }
+    - { role: django-cms }

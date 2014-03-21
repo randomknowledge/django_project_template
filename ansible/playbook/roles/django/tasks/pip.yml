@@ -1,14 +1,11 @@
 {% verbatim %}
 ---
-- name: Install PIP Requirements.
+- name: update base requirements
   sudo_user: "{{project.user}}"
-  pip: >
-    requirements={{item}}
-    virtualenv={{project.virtualenv}}
-  with_items: project.requirements
-  tags:
-    - packages
-    - application
-    - pip
-    - app
+  shell: "{{project.virtualenv}}/bin/pip install -r {{project.root}}/requirements/base/*.txt"
+
+- name: update prod requirements
+  when: project.islive
+  sudo_user: "{{project.user}}"
+  shell: "{{project.virtualenv}}/bin/pip install -r {{project.root}}/requirements/prod/*.txt"
 {% endverbatim %}

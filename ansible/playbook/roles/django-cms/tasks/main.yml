@@ -1,0 +1,10 @@
+{% verbatim %}
+---
+- name: Ensure requirements file is in place
+  when: cms.active
+  copy: src=requirements.txt dest={{ project.root }}/requirements/base/cms.txt
+  notify:
+    - restart uwsgi
+    - update base requirements
+    - update prod requirements
+{% endverbatim %}

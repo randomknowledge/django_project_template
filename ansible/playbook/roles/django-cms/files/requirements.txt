@@ -1,0 +1,7 @@
+Pillow>=2.3.0,<2.4.0
+django-classy-tags>=0.5,<0.6
+django-mptt>=0.6.0,<0.7.0
+django-reversion>=1.8.0,<1.9.0
+django-sekizai>=0.7,<0.8
+djangocms-admin-style>=0.2.0,<0.3.0
+html5lib==0.999
