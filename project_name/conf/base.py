@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'south',
+    '{{ project_name }}',
 ]
 
 TEMPLATE_DIRS = (
