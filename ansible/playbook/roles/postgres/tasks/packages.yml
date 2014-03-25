@@ -16,4 +16,12 @@
     - postgresql-contrib-9.1
     - postgresql-doc-9.1
     - libpq-dev
+
+- name: Ensure requirements file is in place
+  when: database.engine == "postgresql_psycopg2"
+  copy: src=requirements.txt dest={{ project.root }}/requirements/base/postgres.txt
+  notify:
+    - restart uwsgi
+    - update base requirements
+    - update prod requirements
 {% endverbatim %}

@@ -12,9 +12,6 @@ project:
   wsgi: {{ project_name }}.wsgi:application
   host: localhost
   proto: http
-  requirements:
-    - /vagrant/requirements.txt
-    - /vagrant/requirements_prod.txt
 
 database:
   engine: sqlite3
