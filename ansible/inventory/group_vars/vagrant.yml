@@ -23,10 +23,10 @@ superuser:
   email: admin@example.com
 
 search:
-  active: true
+  active: false
   host: 127.0.0.1
   port: 9200
   index_name: haystack
 
 cms:
-  active: true
+  active: false

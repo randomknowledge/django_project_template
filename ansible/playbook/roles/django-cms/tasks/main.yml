@@ -58,4 +58,12 @@
     owner={{project.user}}
     group={{project.group}}
     mode=0644
+
+- name: Copy urls.py
+  when: cms.active
+  copy: src=urls.py dest={{ project.root }}/urls.py
+  notify:
+    - restart uwsgi
+    - update base requirements
+    - update prod requirements
 {% endverbatim %}
