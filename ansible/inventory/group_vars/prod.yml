@@ -30,7 +30,7 @@ search:
   active: true
   host: 127.0.0.1
   port: 9200
-  index_name: haystack
+  index_name: {{ project_name }}
 
 cms:
   active: true

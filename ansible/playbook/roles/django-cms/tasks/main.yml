@@ -28,7 +28,7 @@
   notify: restart uwsgi
   template: >
     src=base.html.j2
-    dest={{project.root}}/{{project.name}}/templates/{{project.name}}/base.html
+    dest={{project.root}}/{{project.name}}/templates/base.html
     owner={{project.user}}
     group={{project.group}}
     mode=0644
