@@ -28,7 +28,12 @@
 
 - name: Ensure requirements file is in place
   when: search.active
-  copy: src=requirements.txt dest={{ project.root }}/requirements/base/search.txt
+  template: >
+    src=requirements.txt.j2
+    dest={{project.root}}/requirements/base/search.txt
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
   notify:
     - restart uwsgi
     - update base requirements
