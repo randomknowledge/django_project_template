@@ -8,10 +8,38 @@ except ValueError:
     pass
 INSTALLED_APPS.insert(idx, 'haystack')
 
+{% if cms.active %}INSTALLED_APPS += ['aldryn_search', 'spurl', 'standard_form']{% endif %}
+
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'URL': 'http://{{ search.host }}:{{ search.port }}/',
-        'INDEX_NAME': '{{ search.index_name }}',
+        'INDEX_NAME': '{{ search.index_name }}.default',
+        'TIMEOUT': 20,
+        'INCLUDE_SPELLING': False,
+        'BATCH_SIZE': 1000,
+    },
+
+    'de': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://{{ search.host }}:{{ search.port }}/',
+        'INDEX_NAME': '{{ search.index_name }}.de',
+        'TIMEOUT': 20,
+        'INCLUDE_SPELLING': False,
+        'BATCH_SIZE': 1000,
+    },
+
+    'en': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://{{ search.host }}:{{ search.port }}/',
+        'INDEX_NAME': '{{ search.index_name }}.en',
+        'TIMEOUT': 20,
+        'INCLUDE_SPELLING': False,
+        'BATCH_SIZE': 1000,
     },
 }
+
+{% if cms.active %}
+HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
+ALDRYN_SEARCH_REGISTER_APPHOOK = True
+{% endif %}
