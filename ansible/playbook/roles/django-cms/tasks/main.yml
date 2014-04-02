@@ -21,7 +21,7 @@
 - name: Activate cms in django (import cms.py)
   when: cms.active
   notify: restart uwsgi
-  lineinfile: dest={{project.root}}/{{project.name}}/conf/base.py regexp="from\.modules\.cms\s+import" line="from .modules.cms import *" state=present
+  lineinfile: dest={{project.root}}/{{project.name}}/conf/base.py regexp="from\s+\.modules\.cms\s+import" line="from .modules.cms import *" state=present
 
 - name: Copy cms base.html
   when: cms.active
