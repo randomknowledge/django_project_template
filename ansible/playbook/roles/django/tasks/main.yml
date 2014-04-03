@@ -1,5 +1,6 @@
 ---
 - include: common.yml
+- include: bcrypt.yml
 - include: packages.yml
 - include: pip.yml
 - include: database.yml
