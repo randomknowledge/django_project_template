@@ -1,0 +1,33 @@
+---
+
+- name: Install required system packages.
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - libffi-dev
+
+- name: Ensure requirements file is in place
+  when: bcrypt.active
+  copy: src=requirements.txt dest={{ project.root }}/requirements/base/bcrypt.txt
+  notify:
+    - restart uwsgi
+    - update base requirements
+    - update prod requirements
+
+- name: Activate bcrypt in django (copy bcrypt.py)
+  when: bcrypt.active
+  notify: restart uwsgi
+  template: >
+    src=bcrypt.py.j2
+    dest={{project.root}}/{{project.name}}/conf/modules/bcrypt.py
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+
+- name: Activate bcrypt in django (import bcrypt.py)
+  when: bcrypt.active
+  notify: restart uwsgi
+  lineinfile: dest={{project.root}}/{{project.name}}/conf/base.py regexp="from\s+\.modules\.bcrypt\s+import" line="from .modules.bcrypt import *" state=present
+

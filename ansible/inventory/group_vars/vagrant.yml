@@ -30,3 +30,6 @@ search:
 
 cms:
   active: false
+
+bcrypt:
+  active: true

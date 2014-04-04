@@ -34,3 +34,6 @@ search:
 
 cms:
   active: true
+
+bcrypt:
+  active: true
