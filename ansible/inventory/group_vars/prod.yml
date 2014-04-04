@@ -19,11 +19,11 @@ database:
   user: {{ project_name }}
   host: "localhost"
   port: 5432
-  {% verbatim %}password: "{{ lookup('password', '/tmp/database.password chars=ascii,numbers,digits,punctuation length=15') }}"{% endverbatim %}
+  {% verbatim %}password: "{{ lookup('password', '/tmp/database.password chars=ascii,numbers,digits length=15') }}"{% endverbatim %}
 
 superuser:
   name: admin
-  {% verbatim %}password: "{{ lookup('password', '/tmp/superuser.password chars=ascii,numbers,digits,punctuation length=15') }}"{% endverbatim %}
+  {% verbatim %}password: "{{ lookup('password', '/tmp/superuser.password chars=ascii,numbers,digits length=15') }}"{% endverbatim %}
   email: admin@example.com
 
 search:
