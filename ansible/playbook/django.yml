@@ -10,3 +10,4 @@
     - { role: nginx }
     - { role: elasticsearch }
     - { role: django-cms }
+    - { role: django-compressor }

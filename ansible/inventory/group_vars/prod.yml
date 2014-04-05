@@ -37,3 +37,6 @@ cms:
 
 bcrypt:
   active: true
+
+compressor:
+  active: true

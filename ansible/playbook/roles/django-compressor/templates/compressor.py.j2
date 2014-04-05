@@ -1,0 +1,17 @@
+# coding: utf-8
+from {{ project.name }}.conf.base import *
+
+STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
+INSTALLED_APPS += ['compressor']
+
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', '/usr/bin/coffee --compile --stdio'),
+    ('text/x-sass', '/usr/local/bin/sass {infile} {outfile}'),
+)
+
+COMPRESS_ENABLED = True
+COMPRESS_OFFLINE = False
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+]
