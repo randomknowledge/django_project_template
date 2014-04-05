@@ -20,7 +20,7 @@
 
 - name: Update sources in project root
   when: project.islive
-  sudo: yes
+  sudo: true
   copy: >
     src=../../../../../
     dest="{{ project.root }}/"

@@ -1,0 +1,41 @@
+---
+
+- name: Install required system packages.
+  when: compressor.active
+  apt: >
+    pkg={{item}}
+    state=installed
+    update-cache=yes
+  with_items:
+    - build-essential
+    - coffeescript
+    - ruby-full
+    - rubygems
+
+- name: Install sass
+  when: compressor.active
+  action: command gem install sass creates=/usr/local/bin/sass
+  sudo: true
+
+- name: Ensure requirements file is in place
+  when: compressor.active
+  copy: src=requirements.txt dest={{ project.root }}/requirements/base/compressor.txt
+  notify:
+    - restart uwsgi
+    - update base requirements
+    - update prod requirements
+
+- name: Activate compressor in django (copy compressor.py)
+  when: compressor.active
+  notify: restart uwsgi
+  template: >
+    src=compressor.py.j2
+    dest={{project.root}}/{{project.name}}/conf/modules/compressor.py
+    owner={{project.user}}
+    group={{project.group}}
+    mode=0644
+
+- name: Activate compressor in django (import compressor.py)
+  when: compressor.active
+  notify: restart uwsgi
+  lineinfile: dest={{project.root}}/{{project.name}}/conf/base.py regexp="from\s+\.modules\.compressor\s+import" line="from .modules.compressor import *" state=present
