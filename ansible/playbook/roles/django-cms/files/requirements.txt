@@ -1,7 +1,7 @@
 Pillow>=2.3.0,<2.4.0
 easy-thumbnails>=1.5,<1.6
 html5lib==0.999
-https://github.com/divio/django-cms/archive/3.0c2.zip
+django-cms>=3.0,<3.1
 django-classy-tags>=0.5,<0.6
 django-mptt>=0.6.0,<0.7.0
 django-reversion>=1.8.0,<1.9.0
